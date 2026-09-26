@@ -1,0 +1,20 @@
+# Ignore generated maze images
+*.png
+*.jpg
+*.jpeg
+*.docx
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments (if you used one)
+venv/
+env/
+.env
+
+# OS and IDE specific files
+.DS_Store
+.vscode/
+.idea/
