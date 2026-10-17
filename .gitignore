@@ -3,11 +3,13 @@
 *.jpg
 *.jpeg
 *.docx
-
+*.zip
+*.pdf
 # Python cache files
 __pycache__/
 *.py[cod]
 *$py.class
+*tempCodeRunnerFile*
 
 # Virtual environments (if you used one)
 venv/

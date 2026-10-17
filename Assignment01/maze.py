@@ -156,7 +156,6 @@ class Maze():
         self.explored = set()
 
         # Keep looping until solution found
-        
         self.start_time = time.time()  # Start the timer
         self.max_frontier_size = 0  # Initialize max frontier size
         while True:
