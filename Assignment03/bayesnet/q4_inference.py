@@ -1,3 +1,4 @@
+import pomegranate
 from pomegranate import *
 from collections import Counter
 
@@ -42,7 +43,7 @@ def generate_samples():
     
     return sample
 
-N = 10000
+N = 100000000
 data = []
 for i in range(N):
     sample = generate_samples()
