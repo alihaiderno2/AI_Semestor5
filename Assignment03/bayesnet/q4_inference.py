@@ -43,7 +43,7 @@ def generate_samples():
     
     return sample
 
-N = 100000000
+N = 1000
 data = []
 for i in range(N):
     sample = generate_samples()
