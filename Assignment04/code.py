@@ -1,7 +1,7 @@
 
 import random
 import numpy as np
-
+import matplotlib.pyplot as plt
 # -------------------------------
 # 1. Game and learning parameters
 # -------------------------------
@@ -19,7 +19,7 @@ EPSILON = 1.0
 EPSILON_MIN = 0.01
 EPSILON_DECAY = 0.9995
 
-EPISODES = 100
+EPISODES = 2000
 
 # # Q[row,column, action] stores the value of an action.
 # # Actions are up,down,right,left.
@@ -89,7 +89,40 @@ def train_agent():
         rewards_per_episode.append(episode_reward)
         epsilon = max(EPSILON_MIN, epsilon * EPSILON_DECAY)
 
+def show_environment():
+    print("Experiment 1: Campus Grid ")
+    for r in range(MAX_ROWS):
+        row_str = ""
+        for c in range(MAX_COLS):
+            if (r, c) == start:
+                row_str += " S "
+            elif (r, c) == goal:
+                row_str += " G "
+            elif (r, c) in obstacles:
+                row_str += " X "
+            else:
+                row_str += " . "
+        print(row_str)
+    print("S = Start, G = Goal, X = Obstacle\n")
+    
+def plot_rewards(rewards):
+    print("--- Experiment 2: Generating Graph... ---")
+    window = 100
+    moving_avg = [np.mean(rewards[max(0, i-window):(i+1)]) for i in range(len(rewards))]
+
+    plt.figure(figsize=(10, 5))
+    plt.plot(rewards, label="Reward per Episode", alpha=0.3, color="blue")
+    plt.plot(moving_avg, label="100-Episode Moving Average", color="red")
+    plt.xlabel("Episode")
+    plt.ylabel("Cumulative Reward")
+    plt.title("Q-Learning Training Progress")
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
 def display_learned_policy():
+    
+    print("Experiment 3: Learned Policy")
     policy_grid = np.full((MAX_ROWS, MAX_COLS), ' ')
     for row in range(MAX_ROWS):
         for col in range(MAX_COLS):
@@ -113,6 +146,8 @@ def display_learned_policy():
         print(' '.join(row))
     
 def final_navigation():
+    
+    print("Experiment 4: Final Navigation ")
     epsilon = 0
     current_state = start
     reward_total = 0
@@ -150,5 +185,7 @@ def final_navigation():
 
 if __name__ == "__main__":
     train_agent()
+    show_environment()
     display_learned_policy()
+    plot_rewards([np.sum(Q[row, col]) for row in range(MAX_ROWS) for col in range(MAX_COLS)])
     final_navigation()
